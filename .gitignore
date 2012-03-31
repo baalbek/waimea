@@ -1,0 +1,7 @@
+*.class
+*.jar
+*.swp
+target
+classes
+*.txt
+*.html
