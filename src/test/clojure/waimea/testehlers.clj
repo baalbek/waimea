@@ -1,12 +1,14 @@
 (ns waimea.testehlers
     (:require [waimea.filters.ehlers.common :as C])
+    (:require [waimea.filters.ehlers.itrend :as I])
+    (:require [waimea.filters.ehlers.cc :as CC])
     (:use clojure.test))
 
-;;(is (= (Swoosh/jada 2 2) 4))
+(let [a (range 100)
+      itr (I/calc-itrend a 20)]
+      (is (= (count a) (count itr))))
 
-(let [a (range 10)
-      result (C/calc-smooth a)]
-      (println (class result)))
 
-(println "Hi")
-    
+
+
+
