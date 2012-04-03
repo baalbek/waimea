@@ -1,5 +1,5 @@
 (ns waimea.filters.ehlers.cc
-    (:require [waimea.filters.ehlers.common :as C]))
+    (:require [waimea.utils :as C]))
 
 
 (defn ave [lx, ^Double cc-val, ^Double f1, ^Double f2]

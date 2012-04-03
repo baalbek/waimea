@@ -1,5 +1,5 @@
 (ns waimea.testehlers
-    (:require [waimea.filters.ehlers.common :as C])
+    (:require [waimea.utils :as C])
     (:require [waimea.filters.ehlers.itrend :as I])
     (:require [waimea.filters.ehlers.cc :as CC])
     (:use clojure.test))

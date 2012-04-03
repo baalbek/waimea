@@ -1,10 +1,24 @@
-(ns waimea.filters.ehlers.common
+(ns waimea.utils
     (:import (java.util Date GregorianCalendar Calendar))
     (:use [clojure.contrib.str-utils :only (re-split)]))
 
 (def cal0 (GregorianCalendar.))
 (def cal1 (GregorianCalendar.))
 (def MILLIS_IN_DAY (* 60 60 24 1000))
+
+
+(defn start-next-month [d]                                                                                   
+    (.setTime cal0 d)                            
+    (.add cal0 Calendar/MONTH 1)                 
+    (let [cd (.getTime cal0)]                    
+        (Date. (.getYear cd) (.getMonth cd) 1)))
+
+(defn find-dates-between [start-date end-date interval]
+    (cond (= :month interval)
+        (loop [nx (start-next-month start-date) result []]
+            (if (.after nx end-date)
+               result
+               (recur (start-next-month nx) (conj result nx))))))
 
 (defn diff-days [d0 d1]
     (.setTime cal0 d0)
