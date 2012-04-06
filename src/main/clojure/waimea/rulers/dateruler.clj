@@ -19,11 +19,10 @@
                         :ppx ppx)))))
 
 (defn pix-x [ruler ^Double value]
-    (let [
-          h-diff (U/diff-days (:start ruler) value)
-         ]
-          (+ (:x0 ruler) (int (* (:ppx ruler) h-diff)))
-       ))  
+    (let [h-diff (U/diff-days (:start ruler) value)]
+          (+ (:x0 ruler) 
+             (int 
+                (* (:ppx ruler) h-diff)))))  
 
 (defn plot-date [^Date d ruler ^Graphics2D g]
     (let [px (pix-x ruler d)

@@ -55,3 +55,10 @@
 
 (defn calc-days [alpha]
     (- (/ 2.0 alpha) 1.0))
+
+(defn find-in-lists [predicate & args]                                           
+    (loop [mv (apply predicate (first args)) lx (rest args)]                                 
+        (if (= (count lx) 0)                              
+            mv                                               
+            (recur (predicate mv (apply predicate (first lx))) (rest lx)))))
+

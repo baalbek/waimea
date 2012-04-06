@@ -17,4 +17,4 @@
 (defn -main [& args]
     (println "Hi"))
 
-(-main)
+;(-main)
