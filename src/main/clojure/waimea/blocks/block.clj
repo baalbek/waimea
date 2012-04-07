@@ -28,11 +28,11 @@
                              :color (:bg C/colors)
                              :plot-fn vr-plot-fn
                              :segs vr-segs})
-                :hruler (ref 
-                            {:start (U/date-add-days start-date -10) 
-                             :end (U/date-add-days end-date 20)
-                             :color (:bg C/colors)
-                             :legend legend})
+                ;:hruler (ref 
+                ;            {:start (U/date-add-days start-date -10) 
+                ;             :end (U/date-add-days end-date 20)
+                ;             :color (:bg C/colors)
+                ;             :legend legend})
                 :pct pct
                 :gap gap
                 :plotters plotters})
