@@ -9,20 +9,19 @@
          ]
           (for [i (range (+ 1 increments))] (int (+ (* i gap) y0)))))
 
-(defn calibrate-vruler [q ul lr]                          
+(defn calibrate-vruler [q]                          
     (let [vr @(:vruler q)       
+          ul (:ul q)
+          lr (:lr q)
           segs (:segs vr)
-            h (- (:y lr) (:y ul))               
-            ppx (/ h (- (:max vr) (:min vr)))]
-        (dosync (ref-set (:vruler q)
-                    (assoc vr 
-                        :ppx ppx
-                        :x0 (:x ul)
-                        :x1 (:x lr)
-                        :y0 (:y ul)
-                        :y1 (:y lr)
-                        :y (vruler-y-coords ul lr segs))))
-        (:y lr)))
+          h (- (:y lr) (:y ul))               
+          ppx (/ h (- (:max vr) (:min vr)))]
+        (assoc vr 
+            :ppx ppx
+            :x0 (:x ul)
+            :x1 (:x lr)
+            :y0 (:y ul)
+            :y (vruler-y-coords ul lr segs))))
 
 (defn pix-y [ruler value]
     (let [

@@ -5,10 +5,10 @@
         [waimea.common :as C]))
 
 (defn create-block [[data-min data-max]
-                    & {:keys [start-date 
+                    & {:keys [pct
+                              start-date 
                               end-date 
                               plotters 
-                              pct     
                               gap 
                               legend 
                               vr-plot-fn 
@@ -17,11 +17,12 @@
                     :or {start-date nil
                          end-date nil
                          plotters []
-                         gap 0
+                         gap 20 
                          legend :false
                          vr-plot-fn VR/plot-vruler 
                          vr-segs 10
                          tolerance 1.1}}]
+                
                 {:vruler (ref 
                             {:min (/ data-min tolerance) 
                              :max (* data-max tolerance)

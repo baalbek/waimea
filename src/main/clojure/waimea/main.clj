@@ -1,6 +1,7 @@
 (ns waimea.main
     (:require 
-        [waimea.blocks.block :as B])
+        [waimea.blocks.block :as B]
+        [waimea.blocks.quadrant :as Q])
     (:import (java.util Date Vector) 
              (java.awt Color Dimension)
              (javax.swing JFrame JLabel JTextField JButton JPanel JComponent)
@@ -26,15 +27,18 @@
                             :x1 (- w mright)
                             :y0 mtop)]
                     (doseq [q qsx]
-                        (println q)))))))
+                        (Q/plot-quadrant q g)))))))
 
 (defn -main [& args]
     (def f (JFrame. "Waimea"))
-    (.setSize f (Dimension. 800 500)) 
+    (.setDefaultCloseOperation f JFrame/EXIT_ON_CLOSE)
+    (.setSize f (Dimension. 1500 1000)) 
     (.add f (create-plot 
-                    [(B/create-block [0.0 100.0] :gap 10)
-                     (B/create-block [0.0 100.0] :gap 10)
-                     (B/create-block [0.0 100.0] :gap 10)]
+                    [
+                     (B/create-block [20.0 100.0] :pct 0.3)
+                     (B/create-block [50.0 200.0] :pct 0.2)
+                     (B/create-block [120.0 800.0] :pct 0.5)
+                     ]
                      60 30 30 30))
     (.setVisible f true))
 
