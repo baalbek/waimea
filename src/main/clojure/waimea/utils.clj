@@ -62,3 +62,8 @@
             mv                                               
             (recur (predicate mv (apply predicate (first lx))) (rest lx)))))
 
+(defn find-min-max [& args]
+   (let [min-result (apply find-in-lists min args)
+         max-result (apply find-in-lists max args)]
+         [min-result max-result]))
+

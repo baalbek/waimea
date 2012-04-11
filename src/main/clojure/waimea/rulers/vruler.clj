@@ -10,7 +10,7 @@
           (for [i (range (+ 1 increments))] (int (+ (* i gap) y0)))))
 
 (defn calibrate-vruler [q]                          
-    (let [vr @(:vruler q)       
+    (let [vr (:vruler q)       
           ul (:ul q)
           lr (:lr q)
           segs (:segs vr)
@@ -24,11 +24,8 @@
             :y (vruler-y-coords ul lr segs))))
 
 (defn pix-y [ruler value]
-    (let [
-          v-diff (- (:max ruler) value)
-         ]
-          (+ (:y0 ruler) (int (* (:ppx ruler) v-diff)))
-       ))  
+    (let [v-diff (- (:max ruler) value)]
+        (+ (:y0 ruler) (int (* (:ppx ruler) v-diff)))))  
 
 (defn val-y [ruler px]
     (let [pxv (/ 1.0 (:ppx ruler))

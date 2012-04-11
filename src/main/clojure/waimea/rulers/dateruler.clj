@@ -4,19 +4,20 @@
              (java.util Date)
              (java.text SimpleDateFormat)))
 
-(def date-format (SimpleDateFormat. "MM/yyyy"))
+(def date-format (SimpleDateFormat. "MM/yy"))
 
-(defn calibrate-dateruler [q ul lr]                          
-    (let [hr @(:hruler q)                   
+(defn calibrate-dateruler [q]                          
+    (let [hr (:hruler q)                   
+          ul (:ul q)
+          lr (:lr q)
           w (- (:x lr) (:x ul))               
           ppx (float (/ w (U/diff-days (:start hr) (:end hr))))]
-        (dosync (ref-set (:hruler q) 
-                    (assoc hr 
-                        :x0 (:x ul)
-                        :x1 (:x lr)
-                        :y0 (:y ul)
-                        :y1 (:y lr)
-                        :ppx ppx)))))
+            (assoc hr 
+                :x0 (:x ul)
+                :x1 (:x lr)
+                :y0 (:y ul)
+                :y1 (:y lr)
+                :ppx ppx)))
 
 (defn pix-x [ruler ^Double value]
     (let [h-diff (U/diff-days (:start ruler) value)]
