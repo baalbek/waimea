@@ -1,5 +1,6 @@
 (ns waimea.plotters.candlestickplotter
     (:require 
+        [waimea.common :as C]
         [waimea.rulers.vruler :as VR]
         [waimea.rulers.dateruler :as HR])
     (:import (java.awt Color BasicStroke)))
@@ -28,17 +29,17 @@
                 (.fillRect graphics x1 y1 (- x2 x1) (- y2 y1))))))
 
 
-(defn candlestick-plotter-fn [dx-f opn-f hi-f lo-f spot-f]            
-    (fn [data hr vr graphics]
+(defn candlestick-plotter [data]            
+    (fn [hr vr graphics]
         (doseq [p data] 
             (let [stroke (BasicStroke. 1.5)
-                x (pix-x hr (dx-f p))
-                opn-val (opn-f p)
-                opn (pix-y vr opn-val)
-                hi (pix-y vr (hi-f p))
-                lo (pix-y vr (lo-f p))
-                spot-val (spot-f p)
-                spot (pix-y vr spot-val)
+                x (HR/pix-x hr (.getDx p))
+                opn-val (.getOpn p)
+                opn (VR/pix-y vr opn-val)
+                hi (VR/pix-y vr (.getHi p))
+                lo (VR/pix-y vr (.getLo p))
+                spot-val (.getCls p)
+                spot (VR/pix-y vr spot-val)
              ]
              (.setStroke graphics stroke)
              (if (> spot-val opn-val)    
