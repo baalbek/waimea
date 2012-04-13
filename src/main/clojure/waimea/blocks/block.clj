@@ -58,4 +58,3 @@
                        (rest q)
                        next-y)))))
 
-(defn plot-block [y])

@@ -1,5 +1,6 @@
 (ns waimea.utils
     (:import (java.util Date GregorianCalendar Calendar))
+    (:require (clojure.contrib [math :as M]))
     (:use [clojure.contrib.str-utils :only (re-split)]))
 
 (def cal0 (GregorianCalendar.))
@@ -67,3 +68,6 @@
          max-result (apply find-in-lists max args)]
          [min-result max-result]))
 
+(defn norm-v [v]
+    (let [mx (max (apply max v) (M/abs (apply min v)))]
+        (map #(/ % mx) v)))
