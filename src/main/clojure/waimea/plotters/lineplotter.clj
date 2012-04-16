@@ -8,7 +8,7 @@
 (defn single-line-plotter [vals dx color]
     (fn [hr vr graphics]
         (.setColor graphics color)
-        (.setStroke graphics (COMM/strokes :lineplot)
+        (.setStroke graphics (COMM/strokes :lineplot))
         (let [vdx (partition 2 1 (map list (rest vals) (rest dx)))]
               (doseq [i vdx] 
                     (let [p0 (first i)
