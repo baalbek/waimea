@@ -12,13 +12,14 @@
         (doseq [f funx]
             (f data hr vr g))))
 
-(defn plot-quadrant [q ^Graphics g]
+(defn plot-quadrant [^Graphics g q]
   (let [vr (VR/calibrate-vruler q)
-        hr (DR/calibrate-dateruler q)] ;@(:hruler q)
+        hr (DR/calibrate-dateruler q)]
           ((:plot-fn vr) vr g)
           (DR/plot-dateruler hr g)
           (doseq [p (:plotters q)] 
-            (p hr vr g))))
+            (p hr vr g))
+          [hr vr]))
 
 (defn quadrant-height [quadrant margin ^JComponent cp]
   (- (* (:pct quadrant) (.getHeight cp)) margin))

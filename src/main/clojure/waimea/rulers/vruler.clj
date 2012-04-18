@@ -21,6 +21,7 @@
             :x0 (:x ul)
             :x1 (:x lr)
             :y0 (:y ul)
+            :y1 (:y lr)
             :y (vruler-y-coords ul lr segs))))
 
 (defn pix-y [ruler value]
