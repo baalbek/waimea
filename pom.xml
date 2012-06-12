@@ -57,7 +57,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <testScript>src/test/clojure/test.clj</testScript>
+                    <testScript>src/test/clojure/waimea/test1.clj</testScript>
                     <testSourceDirectories>
                         <testSourceDirectory>src/test/clojure</testSourceDirectory>
                     </testSourceDirectories>

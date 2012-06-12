@@ -1,8 +1,7 @@
 (ns waimea.test1
-    (:require [waimea.swoosh :as Swoosh])
-    (:use clojure.test))
+    (:use clojure.contrib.test-is
+          waimea.testehlers))
 
-(is (= (Swoosh/jada 2 2) 4))
+(run-tests 'waimea.testehlers)
 
-(println "Hi")
     

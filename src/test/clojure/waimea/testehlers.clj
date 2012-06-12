@@ -8,6 +8,7 @@
       itr (I/calc-itrend a 20)]
       (is (= (count a) (count itr))))
 
+(is (= 1 1))
 
 
 
