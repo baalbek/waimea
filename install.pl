@@ -1,4 +1,4 @@
-#!/bin/perl
+#!/usr/bin/perl
 
 use strict;
 use Carp;
@@ -6,7 +6,6 @@ use Getopt::Std;
 
 use vars qw($opt_x $opt_c $opt_j $opt_i $opt_h);
 
-my $usage_str = << "END_USAGE";
 
 my $groupId = "waimea";
 
@@ -15,6 +14,8 @@ my $artifactId = "waimea";
 my $version = "1.0";
 
 my $jarFile = "$artifactId-$version-SNAPSHOT.jar";
+
+my $usage_str = << "END_USAGE";
 
 Options:
 
