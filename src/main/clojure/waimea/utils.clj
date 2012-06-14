@@ -1,7 +1,7 @@
 (ns waimea.utils
     (:import (java.util Date GregorianCalendar Calendar))
-    (:require (clojure.contrib [math :as M]))
-    (:use [clojure.contrib.str-utils :only (re-split)]))
+    (:require (clojure.math [numeric-tower :as M]))
+    (:use [clojure.string :only (split)]))
 
 (def cal0 (GregorianCalendar.))
 (def cal1 (GregorianCalendar.))
@@ -40,7 +40,7 @@
 
 
 (defn parse-date [s]
-    (let [[y m d] (map #(Integer. %) (re-split #"-" s))] 
+    (let [[y m d] (map #(Integer. %) (split #"-" s))] 
         (new-date y m d)))
 
 (defn calc-smooth [data]
