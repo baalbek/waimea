@@ -56,7 +56,7 @@ if ($opt_j) {
 
 if ($opt_i) {
     print "Installing...\n";
-    `mvn install:install-file -Dfile=target/$jarFile -DgroupId=waimea -DartifactId=waimea -Dversion=1.0 -Dpackaging=jar -DgeneratePom=true`;
+    `mvn install:install-file -Dfile=target/$jarFile -DgroupId=$groupId -DartifactId=$artifactId -Dversion=$version -Dpackaging=jar -DgeneratePom=true`;
 }
 
 exit 0;
