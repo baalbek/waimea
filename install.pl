@@ -7,15 +7,19 @@ use Getopt::Std;
 use vars qw($opt_x $opt_c $opt_j $opt_i $opt_h);
 
 
-my $groupId = "waimea";
+my $groupId = "rcstadheim";
 
 my $artifactId = "waimea";
 
 my $version = "1.1";
 
-my $jarFile = "$artifactId-$version-SNAPSHOT.jar";
+my $jarFile = "target/$artifactId-$version.jar";
 
 my $usage_str = << "END_USAGE";
+
+Maven coord: $groupId/$artifactId/$version
+
+Jar file: $jarFile
 
 Options:
 
@@ -56,7 +60,7 @@ if ($opt_j) {
 
 if ($opt_i) {
     print "Installing...\n";
-    `mvn install:install-file -Dfile=target/$jarFile -DgroupId=$groupId -DartifactId=$artifactId -Dversion=$version -Dpackaging=jar -DgeneratePom=true`;
+    `mvn install:install-file -Dfile=$jarFile -DgroupId=$groupId -DartifactId=$artifactId -Dversion=$version -Dpackaging=jar -DgeneratePom=true`;
 }
 
 exit 0;
