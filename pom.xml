@@ -5,7 +5,7 @@
 
     <groupId>rcstadheim</groupId>
     <artifactId>waimea</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
     <packaging>jar</packaging>
 
     <name>Waimea</name>
@@ -16,6 +16,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>rcstadheim</groupId>
+            <artifactId>rarotonga</artifactId>
+            <version>1.2</version>
+        </dependency>
         <dependency>
             <groupId>rcstadheim</groupId>
             <artifactId>maunakea</artifactId>
@@ -69,6 +74,7 @@
                     <testSourceDirectories>
                         <testSourceDirectory>src/test/clojure</testSourceDirectory>
                     </testSourceDirectories>
+                    <warnOnReflection>true</warnOnReflection>
                 </configuration>
             </plugin>
         </plugins>

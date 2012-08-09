@@ -3,10 +3,11 @@
         [waimea.common :as C]
         [waimea.rulers.vruler :as VR]
         [waimea.rulers.dateruler :as HR])
-    (:import (java.awt Color BasicStroke)))
+    (:import (java.awt Color BasicStroke Graphics2D)
+             (rarotonga.financial Stock)))
 
 
-(defn paint-candlestick [graphics x y-top y1 y2 y-btm is-bull]
+(defn paint-candlestick [^Graphics2D graphics x y-top y1 y2 y-btm is-bull]
     (.setColor graphics (:fg C/colors))
     ;(if (= is-bull :true)
     ;    (.setColor graphics (:fg C/colors))
@@ -30,8 +31,8 @@
 
 
 (defn candlestick-plotter [data]            
-    (fn [hr vr graphics]
-        (doseq [p data] 
+    (fn [hr vr ^Graphics2D graphics]
+        (doseq [^Stock p data]
             (let [stroke (BasicStroke. 1.5)
                 x (HR/pix-x hr (.getDx p))
                 opn-val (.getOpn p)

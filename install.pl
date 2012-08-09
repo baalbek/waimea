@@ -11,7 +11,7 @@ my $groupId = "rcstadheim";
 
 my $artifactId = "waimea";
 
-my $version = "1.1";
+my $version = "1.2";
 
 my $jarFile = "target/$artifactId-$version.jar";
 

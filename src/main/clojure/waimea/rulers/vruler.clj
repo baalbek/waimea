@@ -1,5 +1,5 @@
 (ns waimea.rulers.vruler
-    (:import (java.awt Color)))
+    (:import (java.awt Color Graphics2D)))
 
 (defn vruler-y-coords [ul lr increments]
     (let [
@@ -35,7 +35,7 @@
           v (* (- px y0) pxv)]
           (- mx v)))
 
-(defn plot-vruler [ruler g]
+(defn plot-vruler [ruler ^Graphics2D g]
     (let [x0 (:x0 ruler)
           x1 (:x1 ruler)]
         (doseq [cur-y (:y ruler)]
@@ -44,7 +44,7 @@
             (.setColor g (:color ruler))
             (.drawLine g x0 cur-y x1 cur-y))))
 
-(defn plot-vol-ruler [ruler g]
+(defn plot-vol-ruler [ruler ^Graphics2D g]
     (let [x0 (:x0 ruler)
           x1 (:x1 ruler)
           max-vol (:max ruler)]
