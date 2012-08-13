@@ -77,3 +77,17 @@
 (defn norm-v [v]
   (let [mx (max (apply max v) (M/abs (apply min v)))]
     (map #(/ % mx) v)))
+
+(defmacro xconj [v vs]
+  (if (seq? vs)
+    (do
+    (println "Is seq?")
+    `(loop [v# ~v vs# ~vs]
+       (if-not (seq vs#)
+         v#
+         (recur (conj v# (first vs#)) (rest vs#)))))
+    (do
+      (println "Is not seq")
+    `(conj ~v ~vs))))
+
+;(def m (reduce (fn [m v] (assoc m v (* v v))) {} [1 2 3 4 5]))
