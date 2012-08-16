@@ -9,10 +9,6 @@
 
 (defn paint-candlestick [^Graphics2D graphics x y-top y1 y2 y-btm is-bull]
     (.setColor graphics (:fg C/colors))
-    ;(if (= is-bull :true)
-    ;    (.setColor graphics (:fg C/colors))
-    ;    (.setColor graphics (:cndl-bear C/colors)))
-
     (let [x1 (- x 3)
           x2 (+ x 3)]
         ;; the wicks
@@ -30,7 +26,7 @@
                 (.fillRect graphics x1 y1 (- x2 x1) (- y2 y1))))))
 
 
-(defn candlestick-plotter [data]            
+(defn candlestick-plotter [data]
     (fn [hr vr ^Graphics2D graphics]
         (doseq [^Stock p data]
             (let [stroke (BasicStroke. 1.5)
@@ -46,3 +42,9 @@
              (if (> spot-val opn-val)    
                 (paint-candlestick graphics x hi spot opn lo :true)
                 (paint-candlestick graphics x hi opn spot lo :false))))))
+
+(defn candlestick-week-plotter [data]
+)
+
+(defn paint-candlestick-week [^Graphics2D graphics x y-top y1 y2 y-btm is-bull]
+)

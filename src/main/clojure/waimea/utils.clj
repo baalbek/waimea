@@ -1,7 +1,11 @@
 (ns waimea.utils
-    (:import (java.util Date GregorianCalendar Calendar))
-    (:require (clojure.math [numeric-tower :as M]))
-    (:use [clojure.string :only (split)]))
+    (:import
+      (java.util Date GregorianCalendar Calendar)
+      (clojure.lang Seqable))
+    (:require
+      (clojure.math [numeric-tower :as M]))
+    (:use
+      [clojure.string :only (split)]))
 
 (def cal0 (GregorianCalendar.))
 (def cal1 (GregorianCalendar.))
@@ -79,15 +83,11 @@
     (map #(/ % mx) v)))
 
 (defmacro xconj [v vs]
-  (if (seq? vs)
-    (do
-    (println "Is seq?")
+  (if (instance? Seqable vs)
     `(loop [v# ~v vs# ~vs]
        (if-not (seq vs#)
          v#
-         (recur (conj v# (first vs#)) (rest vs#)))))
-    (do
-      (println "Is not seq")
-    `(conj ~v ~vs))))
+         (recur (conj v# (first vs#)) (rest vs#))))
+    `(conj ~v ~vs)))
 
 ;(def m (reduce (fn [m v] (assoc m v (* v v))) {} [1 2 3 4 5]))
