@@ -1,8 +1,8 @@
 (ns waimea.plotters.candlestickplotter
     (:require 
         [waimea.common :as C]
-        [waimea.rulers.vruler :as VR]
-        [waimea.rulers.dateruler :as HR])
+        (waimea.rulers [vruler :as VR] [dateruler :as HR])
+        [waimea.protocols.financial :as F])
     (:import (java.awt Color BasicStroke Graphics2D)
              (rarotonga.financial Stock)))
 
@@ -25,26 +25,23 @@
                 (.setColor graphics (:cndl-bear C/colors))
                 (.fillRect graphics x1 y1 (- x2 x1) (- y2 y1))))))
 
-
 (defn candlestick-plotter [data]
-    (fn [hr vr ^Graphics2D graphics]
-        (doseq [^Stock p data]
-            (let [stroke (BasicStroke. 1.5)
-                x (HR/pix-x hr (.getDx p))
-                opn-val (.getOpn p)
-                opn (VR/pix-y vr opn-val)
-                hi (VR/pix-y vr (.getHi p))
-                lo (VR/pix-y vr (.getLo p))
-                spot-val (.getCls p)
-                spot (VR/pix-y vr spot-val)
-             ]
-             (.setStroke graphics stroke)
-             (if (> spot-val opn-val)    
-                (paint-candlestick graphics x hi spot opn lo :true)
-                (paint-candlestick graphics x hi opn spot lo :false))))))
+  (fn [hr vr ^Graphics2D graphics]
+    (doseq [^Stock p data]
+      (let [stroke (BasicStroke. 1.5)
+            x (HR/pix-x hr (F/dx p))
+            opn-val (F/opn p)
+            opn (VR/pix-y vr opn-val)
+            hi (VR/pix-y vr (F/hi p))
+            lo (VR/pix-y vr (F/lo p))
+            spot-val (F/spot p)
+            spot (VR/pix-y vr spot-val)
+            ]
+        (.setStroke graphics stroke)
+        (if (> spot-val opn-val)
+          (paint-candlestick graphics x hi spot opn lo :true)
+          (paint-candlestick graphics x hi opn spot lo :false))))))
 
-(defn candlestick-week-plotter [data]
-)
 
-(defn paint-candlestick-week [^Graphics2D graphics x y-top y1 y2 y-btm is-bull]
-)
+
+
