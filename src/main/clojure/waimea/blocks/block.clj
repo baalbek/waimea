@@ -4,40 +4,35 @@
         [waimea.utils :as U]
         [waimea.common :as C]))
 
+(defn foundation [{:keys [
+                            data-min
+                            data-max
+                            pct
+                            start-date
+                            end-date
+                            gap
+                            legend
+                            vr-plot-fn
+                            vr-segs]
+                  :or {     pct 0.25
+                            gap 20
+                            legend :false
+                            vr-plot-fn VR/plot-vruler
+                            vr-segs 10}}]
+  {:vruler
+    {:min data-min
+    :max data-max
+    :color (:bg C/colors)
+    :plot-fn vr-plot-fn
+    :segs vr-segs}
+  :hruler
+    {:start (U/date-add-days start-date -10)
+    :end (U/date-add-days end-date 20)
+    :color (:bg C/colors)
+    :legend legend}
+  :pct pct
+  :gap gap})
 
-(defn create-block [[data-min data-max]
-                    & {:keys [pct
-                              start-date 
-                              end-date 
-                              plotters 
-                              gap 
-                              legend 
-                              vr-plot-fn 
-                              vr-segs
-                              tolerance] 
-                    :or {;start-date nil
-                         ;end-date nil
-                         plotters []
-                         gap 20 
-                         legend :false
-                         vr-plot-fn VR/plot-vruler 
-                         vr-segs 10
-                         tolerance 1.1}}]
-                
-                {:vruler 
-                            {:min (/ data-min tolerance) 
-                             :max (* data-max tolerance)
-                             :color (:bg C/colors)
-                             :plot-fn vr-plot-fn
-                             :segs vr-segs}
-                :hruler
-                            {:start (U/date-add-days start-date -10) 
-                             :end (U/date-add-days end-date 20)
-                             :color (:bg C/colors)
-                             :legend legend}
-                :pct pct
-                :gap gap
-                :plotters plotters})
 
 (defn block-chain [& {:keys [qs h x0 x1 y0]
                                  :or {x0 0.0
