@@ -13,12 +13,14 @@
                             gap
                             legend
                             vr-plot-fn
-                            vr-segs]
+                            vr-segs
+                            plotters]
                   :or {     pct 0.25
                             gap 20
                             legend :false
                             vr-plot-fn VR/plot-vruler
-                            vr-segs 10}}]
+                            vr-segs 10
+                            plotters nil}}]
   {:vruler
     {:min data-min
     :max data-max
@@ -31,7 +33,8 @@
     :color (:bg C/colors)
     :legend legend}
   :pct pct
-  :gap gap})
+  :gap gap
+  :plotters plotters})
 
 
 (defn block-chain [& {:keys [qs h x0 x1 y0]

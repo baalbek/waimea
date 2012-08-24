@@ -7,6 +7,7 @@
   (hi [this])
   (lo [this])
   (spot [this])
+  (value [this])
   (volume [this]))
 
 (extend-protocol IStockprice
@@ -16,5 +17,6 @@
   (hi [this] (.getHi this))
   (lo [this] (.getLo this))
   (spot [this] (.getCls this))
+  (value [this] (.getCls this))
   (volume [this] (.getVolume this)))
 
