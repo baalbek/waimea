@@ -5,10 +5,11 @@
     [waimea.rulers.dateruler :as HR])
   (:import (java.awt Color BasicStroke Graphics2D)))
 
-(defn single-line-plotter [values dx color]
+(defn single-line-plotter [values dx color stroke]
   (fn [hr vr ^Graphics2D graphics]
     (.setColor graphics color)
-    (.setStroke graphics (COMM/strokes :lineplot))
+    ;(.setStroke graphics (COMM/strokes :lineplot))
+    (.setStroke graphics stroke)
     (let [vdx (partition 2 1 (map list (rest values) (rest dx)))]
       (doseq [i vdx]
         (let [p0 (first i)
