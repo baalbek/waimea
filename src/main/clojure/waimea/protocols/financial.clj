@@ -1,5 +1,6 @@
 (ns waimea.protocols.financial
-  (:import [rarotonga.financial Stock]))
+  (:import
+    [oahu.financial.beans StockBean]))
 
 (defprotocol IStockprice
   (dx [this])
@@ -11,7 +12,7 @@
   (volume [this]))
 
 (extend-protocol IStockprice
-  Stock
+  StockBean
   (dx [this] (.getDx this))
   (opn [this] (.getOpn this))
   (hi [this] (.getHi this))

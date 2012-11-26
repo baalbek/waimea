@@ -1,7 +1,7 @@
 (ns waimea.blocks.block
     (:require 
         [waimea.rulers.vruler :as VR]
-        [waimea.utils :as U]
+        [waimea.utils.commonutils :as U]
         [waimea.common :as C]))
 
 (defn foundation [{:keys [

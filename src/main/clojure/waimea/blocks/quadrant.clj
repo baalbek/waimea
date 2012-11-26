@@ -2,9 +2,9 @@
     (:require 
         [waimea.rulers.vruler :as VR]
         [waimea.rulers.dateruler :as DR])
-    (:import 
-        (javax.swing JComponent)
-        (java.awt Color Graphics BasicStroke)))
+    (:import
+      [javafx.scene.canvas Canvas GraphicsContext]
+      [javafx.scene.paint Color]))
 
 (defn do-plotter [plt hr vr g]
     (let [data (:data plt)
@@ -12,7 +12,7 @@
         (doseq [f funx]
             (f data hr vr g))))
 
-(defn plot-quadrant [^Graphics g q]
+(defn plot-quadrant [^GraphicsContext g q]
   (let [vr (VR/calibrate-vruler q)
         hr (DR/calibrate-dateruler q)]
           ((:plot-fn vr) vr g)
@@ -21,6 +21,6 @@
             (p hr vr g))
           [hr vr]))
 
-(defn quadrant-height [quadrant margin ^JComponent cp]
-  (- (* (:pct quadrant) (.getHeight cp)) margin))
+(defn quadrant-height [quadrant margin ^Canvas c]
+  (- (* (:pct quadrant) (.getHeight c)) margin))
 

@@ -1,4 +1,4 @@
-(ns waimea.utils
+(ns waimea.utils.commonutils
     (:import
       (java.util Date GregorianCalendar Calendar)
       (clojure.lang Seqable))
@@ -66,12 +66,6 @@
     (if (= (count lx) 0)
       mv
       (recur (predicate mv (apply predicate (first lx))) (rest lx)))))
-
-(comment
-(defn find-min-max [& args]
- (let [min-result (apply find-in-lists min args)
-   max-result (apply find-in-lists max args)]
-   [min-result max-result])))
 
 (defn find-min-max [vex]
   (let [min-result (find-in-lists min vex)

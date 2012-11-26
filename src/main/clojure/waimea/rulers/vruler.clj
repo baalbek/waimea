@@ -1,5 +1,7 @@
 (ns waimea.rulers.vruler
-    (:import (java.awt Color Graphics2D)))
+    (:import
+      [javafx.scene.canvas GraphicsContext]
+      [javafx.scene.paint Color]))
 
 (defn vruler-y-coords [ul lr increments]
     (let [
@@ -35,21 +37,21 @@
           v (* (- px y0) pxv)]
           (- mx v)))
 
-(defn plot-vruler [ruler ^Graphics2D g]
+(defn plot-vruler [ruler ^GraphicsContext g]
     (let [x0 (:x0 ruler)
           x1 (:x1 ruler)]
         (doseq [cur-y (:y ruler)]
-            (.setColor g Color/BLACK)
-            (.drawString g (format "%.2f" (val-y ruler cur-y)) 5 (- cur-y 3))
-            (.setColor g (:color ruler))
-            (.drawLine g x0 cur-y x1 cur-y))))
+            ;(.setColor g Color/BLACK)
+            (.strokeText g (format "%.2f" (val-y ruler cur-y)) 5 (- cur-y 3))
+            ;(.setColor g (:color ruler))
+            (.stokeLine g x0 cur-y x1 cur-y))))
 
-(defn plot-vol-ruler [ruler ^Graphics2D g]
+(defn plot-vol-ruler [ruler ^GraphicsContext g]
     (let [x0 (:x0 ruler)
           x1 (:x1 ruler)
           max-vol (:max ruler)]
         (doseq [cur-y (:y ruler)]
-            (.setColor g Color/BLACK)
-            (.drawString g (format "%.2f" (/ (val-y ruler cur-y) max-vol)) 5 (- cur-y 3))
-            (.setColor g (:color ruler))
-            (.drawLine g x0 cur-y x1 cur-y))))
+            ;(.setColor g Color/BLACK)
+            (.strokeText g (format "%.2f" (/ (val-y ruler cur-y) max-vol)) 5 (- cur-y 3))
+            ;(.setColor g (:color ruler))
+            (.stokeLine g x0 cur-y x1 cur-y))))

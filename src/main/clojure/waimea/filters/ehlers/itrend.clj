@@ -1,5 +1,5 @@
 (ns waimea.filters.ehlers.itrend
-    (:require [waimea.utils :as C]))
+    (:require [waimea.utils.commonutils :as C]))
 
 (defn init-itrend [data counter result]
     (when (> counter 0)

@@ -1,8 +1,10 @@
 (ns waimea.rulers.dateruler
-  (:require [waimea.utils :as U])
-  (:import (java.awt Color Graphics2D)
-     (java.util Date)
-     (java.text SimpleDateFormat)))
+  (:require [waimea.utils.commonutils :as U])
+  (:import
+    [javafx.scene.canvas GraphicsContext]
+    [javafx.scene.paint Color]
+    [java.util Date]
+    [java.text SimpleDateFormat]))
 
 (def date-format (SimpleDateFormat. "MM/yy"))
 
@@ -25,16 +27,16 @@
        (int
           (* (:ppx ruler) h-diff)))))
 
-(defn plot-date [^Date d ruler ^Graphics2D g]
+(defn plot-date [^Date d ruler ^GraphicsContext g]
   (let [px (pix-x ruler d)
         y0 (:y0 ruler)
         y1 (:y1 ruler)
         legend (:legend ruler)]
     (if (= legend :true)
-        (.drawString g (.format ^SimpleDateFormat date-format d) px (+ (int y1) 15)))
-    (.drawLine g px y0 px y1)))
+        (.strokeText g (.format ^SimpleDateFormat date-format d) px (+ (int y1) 15)))
+    (.strokeLine g px y0 px y1)))
 
-(defn plot-dateruler [ruler ^Graphics2D g]
+(defn plot-dateruler [ruler ^GraphicsContext g]
   (let [pix (U/find-dates-between (:start ruler) (:end ruler) :month)]
     (doseq [m pix]
       (plot-date m ruler g))))
