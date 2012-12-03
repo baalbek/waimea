@@ -9,8 +9,7 @@
 
 (defn single-line-plotter [values dx]
   (fn [hr vr ^GraphicsContext graphics]
-    (let [vdx (partition 2 1 (map list (rest values) (rest dx)))]
-      ;(.setStroke graphics stroke)
+    (let [vdx (partition 2 1 (map list values dx))]
       (doseq [i vdx]
         (let [p0 (first i)
               p1 (second i)

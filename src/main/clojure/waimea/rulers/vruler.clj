@@ -1,7 +1,10 @@
 (ns waimea.rulers.vruler
-    (:import
-      [javafx.scene.canvas GraphicsContext]
-      [javafx.scene.paint Color]))
+  (:import
+    [javafx.scene.canvas GraphicsContext]
+    [javafx.scene.text Text]
+    [javafx.scene.paint Color])
+  (:require
+    [waimea.utils.fxutils :as FX]))
 
 (defn vruler-y-coords [ul lr increments]
     (let [
@@ -9,7 +12,7 @@
             gap (/ diff increments)
             y0 (:y ul)
          ]
-          (for [i (range (+ 1 increments))] (int (+ (* i gap) y0)))))
+          (for [i (range (+ 1 increments))] (+ 0.5 (int (+ (* i gap) y0))))))
 
 (defn calibrate-vruler [q]                          
     (let [vr (:vruler q)       
@@ -41,10 +44,14 @@
     (let [x0 (:x0 ruler)
           x1 (:x1 ruler)]
         (doseq [cur-y (:y ruler)]
-            ;(.setColor g Color/BLACK)
-            (.strokeText g (format "%.2f" (val-y ruler cur-y)) 5 (- cur-y 3))
-            ;(.setColor g (:color ruler))
+
+            (let [t (.getLineWidth g)]
+              (.setLineWidth g 1.1)
+              (.strokeText g (format "%.2f" (val-y ruler cur-y)) 5.5 (- cur-y 3.5))
+              (.setLineWidth g t))
+            ;(Text 5 (- cur-y 3) (format "%.2f" (val-y ruler cur-y)))
             (.strokeLine g x0 cur-y x1 cur-y))))
+          ;(FX/drawLine g x0 cur-y x1 cur-y))))
 
 (defn plot-vol-ruler [ruler ^GraphicsContext g]
     (let [x0 (:x0 ruler)
@@ -54,4 +61,5 @@
             ;(.setColor g Color/BLACK)
             (.strokeText g (format "%.2f" (/ (val-y ruler cur-y) max-vol)) 5 (- cur-y 3))
             ;(.setColor g (:color ruler))
-            (.strokeLine g x0 cur-y x1 cur-y))))
+            ;(.strokeLine g x0 cur-y x1 cur-y)
+          (FX/drawLine  g x0 cur-y x1 cur-y))))
