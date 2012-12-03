@@ -44,7 +44,7 @@
             ;(.setColor g Color/BLACK)
             (.strokeText g (format "%.2f" (val-y ruler cur-y)) 5 (- cur-y 3))
             ;(.setColor g (:color ruler))
-            (.stokeLine g x0 cur-y x1 cur-y))))
+            (.strokeLine g x0 cur-y x1 cur-y))))
 
 (defn plot-vol-ruler [ruler ^GraphicsContext g]
     (let [x0 (:x0 ruler)
@@ -54,4 +54,4 @@
             ;(.setColor g Color/BLACK)
             (.strokeText g (format "%.2f" (/ (val-y ruler cur-y) max-vol)) 5 (- cur-y 3))
             ;(.setColor g (:color ruler))
-            (.stokeLine g x0 cur-y x1 cur-y))))
+            (.strokeLine g x0 cur-y x1 cur-y))))

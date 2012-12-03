@@ -32,8 +32,8 @@
                         (recur (rest v) res-val v-1)))))))
 
 (defn calc-itrend [data, ^Integer days]
-    {:pre [(>= (count data) 20)]
-     :post [= (count %) (count data)]}
+    ;{:pre [(>= (count data) 20)]
+    ; :post [= (count %) (count data)]}
     (let [result (atom [])
           alpha  (C/calc-alpha days)]
         (init-itrend data 8 result)
