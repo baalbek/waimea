@@ -9,6 +9,7 @@
       [oahu.financial.beans StockBean]))
 
 
+(comment
 (defn paint-candlestick [^GraphicsContext graphics x y-top y1 y2 y-btm is-bull]
     ;(.setColor graphics (:fg C/colors))
     (let [x1 (- x 3)
@@ -24,7 +25,27 @@
                 (.strokeLine graphics x2 y2 x1 y2)
                 (.strokeLine graphics x1 y2 x1 y1))
             (do
-                (.fillRect graphics x1 y1 (- x2 x1) (- y2 y1))))))
+                (.fillRect graphics x1 y1 (- x2 x1) (- y2 y1)))))))
+
+(defn paint-candlestick [^GraphicsContext graphics
+                         x
+                         y-top
+                         y1
+                         y2
+                         y-btm
+                         is-bull]
+  (let [x1 (- x 3)
+        x2 (+ x 3)]
+    (doto graphics
+      (.beginPath)
+      ;; the wicks
+      (.moveTo x y1)
+      (.lineTo x y-top)
+      (.moveTo x y2)
+      (.lineTo x y-btm)
+
+    )))
+    ;; the wicks
 
 (defn candlestick-plotter [data]
   (fn [hr vr ^GraphicsContext graphics]

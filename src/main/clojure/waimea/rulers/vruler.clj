@@ -31,7 +31,7 @@
 
 (defn pix-y [ruler value]
     (let [v-diff (- (:max ruler) value)]
-        (+ (:y0 ruler) (int (* (:ppx ruler) v-diff)))))  
+        (+ (:y0 ruler) (* (:ppx ruler) v-diff))))
 
 (defn val-y [ruler px]
     (let [pxv (/ 1.0 (:ppx ruler))
@@ -46,8 +46,8 @@
         (doseq [cur-y (:y ruler)]
 
             (let [t (.getLineWidth g)]
-              (.setLineWidth g 1.1)
-              (.strokeText g (format "%.2f" (val-y ruler cur-y)) 5.5 (- cur-y 3.5))
+              (.setLineWidth g 1.0)
+              (.strokeText g (format "%.2f" (val-y ruler cur-y)) 5.5 (- cur-y 3.0))
               (.setLineWidth g t))
             ;(Text 5 (- cur-y 3) (format "%.2f" (val-y ruler cur-y)))
             (.strokeLine g x0 cur-y x1 cur-y))))
