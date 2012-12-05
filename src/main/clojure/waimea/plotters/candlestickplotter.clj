@@ -52,9 +52,8 @@
         (.lineTo x1 y2)
         (.lineTo x1 y1))
       (doto graphics
-        (.setStroke (Color/rgb 255 0 0))
-        (.strokeRect x1 y1 (- x2 y1) (- y2 y1))
-        (.setStroke (Color/rgb 255 255 255))))
+        (.setFill (Color/rgb 255 0 0))
+        (.fillRect x1 y1 (- x2 x1) (- y2 y1))))
     (doto graphics
       (.closePath)
       (.stroke))))
@@ -74,7 +73,7 @@
     (let [jitter-fn #(+ 0.5 (int %))]
       (doseq [^StockBean p data]
         (let [;stroke (BasicStroke. 1.5)
-              x (HR/pix-x hr (F/dx p))
+              x (HR/pix-x hr (F/dx p) jitter-fn)
               opn-val (F/opn p)
               opn (VR/pix-y vr opn-val jitter-fn)
               hi (VR/pix-y vr (F/hi p) jitter-fn)

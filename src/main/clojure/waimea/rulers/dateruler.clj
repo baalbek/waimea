@@ -21,10 +21,19 @@
         :y1 (:y lr)
         :ppx ppx)))
 
-(defn pix-x [ruler ^Double value]
-  (let [h-diff (U/diff-days (:start ruler) value)]
-    (+ (:x0 ruler)
-      (* (:ppx ruler) h-diff))))
+(defmacro pix-x [& args]
+  (let [[ruler value f] args
+        base-form `(let [h-diff# (U/diff-days (:start ~ruler) ~value)]
+                          (+ (:x0 ~ruler)
+                            (* (:ppx ~ruler) h-diff#)))]
+    (if (= f nil)
+      base-form
+      `(~f ~base-form))))
+
+;(defn pix-x [ruler ^Double value]
+;  (let [h-diff (U/diff-days (:start ruler) value)]
+;    (+ (:x0 ruler)
+;      (* (:ppx ruler) h-diff))))
 
 (defn plot-date [^Date d ruler ^GraphicsContext g]
   (let [px (pix-x ruler d)

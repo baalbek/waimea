@@ -29,11 +29,6 @@
             :y1 (:y lr)
             :y (vruler-y-coords ul lr segs))))
 
-;(defn pix-y [ruler value]
-;    (let [v-diff (- (:max ruler) value)]
-;        (+ (:y0 ruler) (* (:ppx ruler) v-diff))))
-
-;(defmacro pix-y [ruler value & rest]
 (defmacro pix-y [& args]
   (let [[ruler value f] args
          base-form `(let [v-diff# (- (:max ~ruler) ~value)]

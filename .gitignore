@@ -6,3 +6,5 @@ classes
 *.txt
 *.html
 *.*~
+.idea
+*.iml
