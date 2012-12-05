@@ -30,11 +30,6 @@
       base-form
       `(~f ~base-form))))
 
-;(defn pix-x [ruler ^Double value]
-;  (let [h-diff (U/diff-days (:start ruler) value)]
-;    (+ (:x0 ruler)
-;      (* (:ppx ruler) h-diff))))
-
 (defn plot-date [^Date d ruler ^GraphicsContext g]
   (let [px (pix-x ruler d)
         y0 (:y0 ruler)
@@ -48,6 +43,7 @@
     (.strokeLine g px y0 px y1)))
 
 (defn plot-dateruler [ruler ^GraphicsContext g]
+  (.setLineWidth g 0.25)
   (let [pix (U/find-dates-between (:start ruler) (:end ruler) :month)]
     (doseq [m pix]
       (plot-date m ruler g))))

@@ -46,10 +46,10 @@
     (- mx v)))
 
 (defn plot-vruler [ruler ^GraphicsContext g]
+    (.setLineWidth g 0.25)
     (let [x0 (:x0 ruler)
           x1 (:x1 ruler)]
         (doseq [cur-y (:y ruler)]
-
             (let [t (.getLineWidth g)]
               (.setLineWidth g 1.0)
               (.strokeText g (format "%.2f" (val-y ruler cur-y)) 5.5 (- cur-y 3.0))
