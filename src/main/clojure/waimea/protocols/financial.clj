@@ -18,6 +18,6 @@
   (hi [this] (.getHi this))
   (lo [this] (.getLo this))
   (spot [this] (.getCls this))
-  (value [this] (.getCls this))
+  (value [this] (.getValue this))
   (volume [this] (.getVolume this)))
 

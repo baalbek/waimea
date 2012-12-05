@@ -24,9 +24,7 @@
 (defn pix-x [ruler ^Double value]
   (let [h-diff (U/diff-days (:start ruler) value)]
     (+ (:x0 ruler)
-       (+ 0.5
-        (int
-          (* (:ppx ruler) h-diff))))))
+      (* (:ppx ruler) h-diff))))
 
 (defn plot-date [^Date d ruler ^GraphicsContext g]
   (let [px (pix-x ruler d)
@@ -35,7 +33,7 @@
         legend (:legend ruler)]
     (if (= legend :true)
       (let [t (.getLineWidth g)]
-        (.setLineWidth g 0.75)
+        (.setLineWidth g 1.0)
         (.strokeText g (.format ^SimpleDateFormat date-format d) (+ 0.5 (int px)) (+ 0.5 (+ (int y1) 15)))
         (.setLineWidth g t)))
     (.strokeLine g px y0 px y1)))

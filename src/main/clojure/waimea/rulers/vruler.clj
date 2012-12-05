@@ -29,16 +29,25 @@
             :y1 (:y lr)
             :y (vruler-y-coords ul lr segs))))
 
-(defn pix-y [ruler value]
-    (let [v-diff (- (:max ruler) value)]
-        (+ (:y0 ruler) (* (:ppx ruler) v-diff))))
+;(defn pix-y [ruler value]
+;    (let [v-diff (- (:max ruler) value)]
+;        (+ (:y0 ruler) (* (:ppx ruler) v-diff))))
+
+(defmacro pix-y [ruler value & rest]
+  (let [base-form `(let [v-diff# (- (:max ~ruler) ~value)]
+                  (+ (:y0 ~ruler) (* (:ppx ~ruler) v-diff#)))
+        [f] rest]
+    (if (= f nil)
+      (do (println "f is nil: " ruler value) base-form)
+      (do (println "f is NOT nil: " f) `(~f ~base-form)))))
+
 
 (defn val-y [ruler px]
-    (let [pxv (/ 1.0 (:ppx ruler))
-          mx (:max ruler) 
-          y0 (:y0 ruler)
-          v (* (- px y0) pxv)]
-          (- mx v)))
+  (let [pxv (/ 1.0 (:ppx ruler))
+    mx (:max ruler)
+    y0 (:y0 ruler)
+    v (* (- px y0) pxv)]
+    (- mx v)))
 
 (defn plot-vruler [ruler ^GraphicsContext g]
     (let [x0 (:x0 ruler)

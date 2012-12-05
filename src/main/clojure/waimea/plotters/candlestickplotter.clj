@@ -51,13 +51,14 @@
   (fn [hr vr ^GraphicsContext graphics]
     (doseq [^StockBean p data]
       (let [;stroke (BasicStroke. 1.5)
+            jitter-fn #(+ 0.5 (int %))
             x (HR/pix-x hr (F/dx p))
             opn-val (F/opn p)
-            opn (VR/pix-y vr opn-val)
-            hi (VR/pix-y vr (F/hi p))
-            lo (VR/pix-y vr (F/lo p))
+            opn (VR/pix-y vr opn-val jitter-fn)
+            hi (VR/pix-y vr (F/hi p) jitter-fn)
+            lo (VR/pix-y vr (F/lo p) jitter-fn)
             spot-val (F/spot p)
-            spot (VR/pix-y vr spot-val)
+            spot (VR/pix-y vr spot-val jitter-fn)
             ]
         ;(.setStroke graphics stroke)
         (if (> spot-val opn-val)
