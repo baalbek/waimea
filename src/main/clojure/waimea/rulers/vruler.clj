@@ -33,10 +33,11 @@
 ;    (let [v-diff (- (:max ruler) value)]
 ;        (+ (:y0 ruler) (* (:ppx ruler) v-diff))))
 
-(defmacro pix-y [ruler value & rest]
-  (let [base-form `(let [v-diff# (- (:max ~ruler) ~value)]
-                  (+ (:y0 ~ruler) (* (:ppx ~ruler) v-diff#)))
-        [f] rest]
+;(defmacro pix-y [ruler value & rest]
+(defmacro pix-y [& args]
+  (let [[ruler value f] args
+         base-form `(let [v-diff# (- (:max ~ruler) ~value)]
+                  (+ (:y0 ~ruler) (* (:ppx ~ruler) v-diff#)))]
     (if (= f nil)
       (do (println "f is nil: " ruler value) base-form)
       (do (println "f is NOT nil: " f) `(~f ~base-form)))))
