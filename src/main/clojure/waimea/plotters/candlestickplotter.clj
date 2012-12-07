@@ -17,21 +17,21 @@
                          is-bull]
   (let [x1 (- x 3)
         x2 (+ x 3)]
-    ;; the wicks
+
     (doto graphics
+      ;; the wicks
       (.beginPath)
       (.moveTo x y1)
       (.lineTo x y-top)
       (.moveTo x y2)
-      (.lineTo x y-btm))
-    ;; the body
-    (if (= is-bull :true)
-      (doto graphics
-        (.moveTo x1 y1)
-        (.lineTo x2 y1)
-        (.lineTo x2 y2)
-        (.lineTo x1 y2)
-        (.lineTo x1 y1))
+      (.lineTo x y-btm)
+      ;; the body
+      (.moveTo x1 y1)
+      (.lineTo x2 y1)
+      (.lineTo x2 y2)
+      (.lineTo x1 y2)
+      (.lineTo x1 y1))
+    (if (= is-bull :false)
       (doto graphics
         (.setFill (Color/rgb 255 0 0))
         (.fillRect x1 y1 (- x2 x1) (- y2 y1))))
