@@ -7,9 +7,10 @@
     [javafx.scene.canvas GraphicsContext]
     [javafx.scene.paint Color]))
 
-(defn single-line-plotter [values dx]
+(defn single-line-plotter [values dx stroke]
   (fn [hr vr ^GraphicsContext graphics]
     (.setLineWidth graphics 0.5)
+    (.setStroke graphics stroke)
     (let [vdx (partition 2 1 (map list values dx))]
       (doseq [i vdx]
         (let [p0 (first i)

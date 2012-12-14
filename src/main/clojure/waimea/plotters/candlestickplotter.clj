@@ -42,6 +42,7 @@
 (defn candlestick-plotter [data]
   (fn [hr vr ^GraphicsContext graphics]
     (.setLineWidth graphics 0.5)
+    (.setStroke graphics (Color/rgb 0 0 0))
     (let [jitter-fn #(+ 0.5 (int %))]
       (doseq [^StockBean p data]
         (let [x (HR/pix-x hr (F/dx p) jitter-fn)
