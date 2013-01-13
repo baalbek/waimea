@@ -19,8 +19,8 @@
         (+ data-val cycle-val))))
 
 (defn cybercycle [data, ^Integer days]
-    {:pre [(>= (count data) 20)]
-     :post [= (count %) (count data)]}
+    ;{:pre [(>= (count data) 20)]
+    ;:post [= (count %) (count data)]}
     (let [
           alpha (C/calc-alpha days)
           smooth (C/calc-smooth data)
