@@ -47,6 +47,7 @@
 
 (defn plot-vruler [ruler ^GraphicsContext g]
     (.setLineWidth g 0.25)
+    (.setStroke g Color/DARKSLATEGRAY)
     (let [x0 (:x0 ruler)
           x1 (:x1 ruler)]
         (doseq [cur-y (:y ruler)]
@@ -59,12 +60,13 @@
           ;(FX/drawLine g x0 cur-y x1 cur-y))))
 
 (defn plot-vol-ruler [ruler ^GraphicsContext g]
-    (let [x0 (:x0 ruler)
-          x1 (:x1 ruler)
-          max-vol (:max ruler)]
-        (doseq [cur-y (:y ruler)]
-            ;(.setColor g Color/BLACK)
-            (.strokeText g (format "%.2f" (/ (val-y ruler cur-y) max-vol)) 5 (- cur-y 3))
-            ;(.setColor g (:color ruler))
-            ;(.strokeLine g x0 cur-y x1 cur-y)
-          (FX/drawLine  g x0 cur-y x1 cur-y))))
+  (.setStroke g Color/DARKSLATEGRAY)
+  (let [x0 (:x0 ruler)
+        x1 (:x1 ruler)
+        max-vol (:max ruler)]
+      (doseq [cur-y (:y ruler)]
+          ;(.setColor g Color/BLACK)
+          (.strokeText g (format "%.2f" (/ (val-y ruler cur-y) max-vol)) 5 (- cur-y 3))
+          ;(.setColor g (:color ruler))
+          ;(.strokeLine g x0 cur-y x1 cur-y)
+        (FX/drawLine  g x0 cur-y x1 cur-y))))

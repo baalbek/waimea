@@ -17,7 +17,7 @@
             f4 (- 1.0 alpha)
             f5 (* f4 f4)
           ]
-        (loop [v (-> data rest rest rest rest rest rest) 
+        (loop [v (-> data rest rest rest rest rest rest) ; (drop 6 data) !!!
                v-1 (nth @result 7) 
                v-2 (nth @result 6)]
             ;(when (> (count v) 2) <== makes it dog slow!

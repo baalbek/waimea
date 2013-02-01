@@ -23,6 +23,8 @@
 
 (defn volume-plotter [values dx color]
   (fn [hr vr ^GraphicsContext graphics]
+    (.setLineWidth graphics 1.0)
+    (.setStroke graphics color)
     (doseq [v (map list values dx)]
       (let [ cur-val (first v)
              cur-dx (second v)
