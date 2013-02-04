@@ -35,7 +35,7 @@
         y0 (:y0 ruler)
         y1 (:y1 ruler)
         legend (:legend ruler)]
-    (if (= legend :true)
+    (if (= legend true)
       (let [t (.getLineWidth g)]
         (.setLineWidth g 1.0)
         (.strokeText g (.format ^SimpleDateFormat date-format d) (+ 0.5 (int px)) (+ 0.5 (+ (int y1) 15)))

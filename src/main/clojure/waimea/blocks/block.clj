@@ -17,7 +17,7 @@
                             plotters]
                   :or {     pct 0.25
                             gap 20
-                            legend :false
+                            legend false
                             vr-plot-fn VR/plot-vruler
                             vr-segs 10
                             plotters nil}}]

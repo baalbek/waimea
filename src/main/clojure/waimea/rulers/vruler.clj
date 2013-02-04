@@ -66,7 +66,8 @@
         max-vol (:max ruler)]
       (doseq [cur-y (:y ruler)]
           ;(.setColor g Color/BLACK)
-          (.strokeText g (format "%.2f" (/ (val-y ruler cur-y) max-vol)) 5 (- cur-y 3))
+        (if (= (:legend ruler) true)
+          (.strokeText g (format "%.2f" (/ (val-y ruler cur-y) max-vol)) 5 (- cur-y 3)))
           ;(.setColor g (:color ruler))
           ;(.strokeLine g x0 cur-y x1 cur-y)
         (FX/drawLine  g x0 cur-y x1 cur-y))))
