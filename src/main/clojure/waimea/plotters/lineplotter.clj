@@ -1,6 +1,7 @@
 (ns waimea.plotters.lineplotter
   (:require
-    [waimea.common :as COMM]
+    [waimea.common :as COMM]    [waimea.protocols.chart :as CHART]
+
     [waimea.rulers.vruler :as VR]
     [waimea.rulers.dateruler :as HR])
   (:import

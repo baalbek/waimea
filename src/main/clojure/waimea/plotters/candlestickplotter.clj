@@ -1,6 +1,7 @@
 (ns waimea.plotters.candlestickplotter
     (:require 
         [waimea.common :as C]
+        [waimea.protocols.chart :as CHART]
         (waimea.rulers [vruler :as VR] [dateruler :as HR])
         [waimea.protocols.financial :as F])
     (:import

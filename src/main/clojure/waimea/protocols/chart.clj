@@ -1,9 +1,5 @@
 (ns waimea.protocols.chart)
 
-(defprotocol IVruler
-  (pixY [this value])
-  (valY [this pix]))
-
-(defprotocol IHruler
-  (pixX [this value])
-  (valX [this pix]))
+(defprotocol IRuler
+  (pix [this value] [this value f])
+  (value [this pix]))

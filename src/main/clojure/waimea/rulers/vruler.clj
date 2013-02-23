@@ -4,7 +4,18 @@
     [javafx.scene.text Text]
     [javafx.scene.paint Color])
   (:require
-    [waimea.utils.fxutils :as FX]))
+    [waimea.utils.fxutils :as FX]
+    [waimea.protocols.chart :as CH]))
+
+
+(defrecord VRuler [y0 max ppx])
+
+(extend-protocol CH/IRuler
+  VRuler
+  (pix
+    ([this value])
+    ([this value f]))
+  (value [this pix]))
 
 (defn vruler-y-coords [ul lr increments]
     (let [
@@ -29,13 +40,20 @@
             :y1 (:y lr)
             :y (vruler-y-coords ul lr segs))))
 
-(defmacro pix-y [& args]
-  (let [[ruler value f] args
-         base-form `(let [v-diff# (- (:max ~ruler) ~value)]
-                  (+ (:y0 ~ruler) (* (:ppx ~ruler) v-diff#)))]
-    (if (= f nil)
-      (do (println "f is nil: " ruler value) base-form)
-      (do (println "f is NOT nil: " f) `(~f ~base-form)))))
+;(defmacro pix-y [& args]
+;  (let [[ruler value f] args
+;         base-form `(let [v-diff# (- (:max ~ruler) ~value)]
+;                  (+ (:y0 ~ruler) (* (:ppx ~ruler) v-diff#)))]
+;    (if (= f nil)
+;      base-form
+;      `(~f ~base-form))))
+
+(defn pix-y
+  ([ruler value]
+    (let [v-diff (- (:max ruler) value)]
+      (+ (:y0 ruler) (* (:ppx ruler) v-diff))))
+  ([ruler value f]
+    (f (pix-y ruler value))))
 
 
 (defn val-y [ruler px]
@@ -46,18 +64,18 @@
     (- mx v)))
 
 (defn plot-vruler [ruler ^GraphicsContext g]
-    (.setLineWidth g 0.25)
-    (.setStroke g Color/DARKSLATEGRAY)
-    (let [x0 (:x0 ruler)
-          x1 (:x1 ruler)]
-        (doseq [cur-y (:y ruler)]
-            (let [t (.getLineWidth g)]
-              (.setLineWidth g 1.0)
-              (.strokeText g (format "%.2f" (val-y ruler cur-y)) 5.5 (- cur-y 3.0))
-              (.setLineWidth g t))
-            ;(Text 5 (- cur-y 3) (format "%.2f" (val-y ruler cur-y)))
-            (.strokeLine g x0 cur-y x1 cur-y))))
-          ;(FX/drawLine g x0 cur-y x1 cur-y))))
+  (.setLineWidth g 0.25)
+  (.setStroke g Color/DARKSLATEGRAY)
+  (let [x0 (:x0 ruler)
+        x1 (:x1 ruler)]
+    (doseq [cur-y (:y ruler)]
+      (let [t (.getLineWidth g)]
+        (.setLineWidth g 1.0)
+        (.strokeText g (format "%.2f" (val-y ruler cur-y)) 5.5 (- cur-y 3.0))
+        (.setLineWidth g t))
+      ;(Text 5 (- cur-y 3) (format "%.2f" (val-y ruler cur-y)))
+      (.strokeLine g x0 cur-y x1 cur-y))))
+    ;(FX/drawLine g x0 cur-y x1 cur-y))))
 
 (defn plot-vol-ruler [ruler ^GraphicsContext g]
   (.setStroke g Color/DARKSLATEGRAY)
@@ -71,3 +89,4 @@
           ;(.setColor g (:color ruler))
           ;(.strokeLine g x0 cur-y x1 cur-y)
         (FX/drawLine  g x0 cur-y x1 cur-y))))
+
