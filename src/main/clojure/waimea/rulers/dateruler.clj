@@ -1,5 +1,6 @@
 (ns waimea.rulers.dateruler
-  (:require [waimea.utils.commonutils :as U])
+  (:require [waimea.utils.commonutils :as U]
+            [waimea.protocols.chart :as CH])
   (:import
     [javafx.scene.canvas GraphicsContext]
     [javafx.scene.paint Color]
@@ -7,6 +8,15 @@
     [java.text SimpleDateFormat]))
 
 (def date-format (SimpleDateFormat. "MM/yy"))
+
+(defrecord DateRuler [x0 start ppx])
+
+(extend-protocol CH/IRuler
+  DateRuler
+  (pix
+    ([this value])
+    ([this value f]))
+  (value [this pix]))
 
 (defn calibrate-dateruler [q]                          
   (let [hr (:hruler q)

@@ -13,8 +13,11 @@
 (extend-protocol CH/IRuler
   VRuler
   (pix
-    ([this value])
+    ([this value]
+      (let [v-diff (- (:max ruler) value)]
+        (+ (:y0 ruler) (* (:ppx ruler) v-diff))))
     ([this value f]))
+      (f (pix-y ruler value))
   (value [this pix]))
 
 (defn vruler-y-coords [ul lr increments]
