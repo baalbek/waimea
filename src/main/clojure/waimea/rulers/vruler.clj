@@ -10,15 +10,29 @@
 
 (defrecord VRuler [y0 max ppx])
 
+
+(comment
 (extend-protocol CH/IRuler
   VRuler
-  (pix
+  (calcPix
+    ([this value] 3)
+    ([this value f]
+      (f (CH/calcPix this value))))
+  (calcValue [this pix]))
+)
+
+(extend-protocol CH/IRuler
+  VRuler
+  (calcPix
     ([this value]
-      (let [v-diff (- (:max ruler) value)]
-        (+ (:y0 ruler) (* (:ppx ruler) v-diff))))
-    ([this value f]))
-      (f (pix-y ruler value))
-  (value [this pix]))
+      (let [v-diff (- (.max this) value)]
+        (+ (.y0 this) (* (.ppx this) v-diff))))
+    ([this value f]
+      (f (CH/calcPix this value))))
+  (calcValue [this pix]
+    (let [pxv (/ 1.0 (.ppx this))
+          v (* (- pix (.y0 this)) pxv)]
+        (- (.max this) v))))
 
 (defn vruler-y-coords [ul lr increments]
     (let [

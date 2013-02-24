@@ -1,5 +1,5 @@
 (ns waimea.protocols.chart)
 
 (defprotocol IRuler
-  (pix [this value] [this value f])
-  (value [this pix]))
+  (calcPix [this value] [this value f])
+  (calcValue [this pix]))
