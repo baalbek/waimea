@@ -49,13 +49,13 @@
           segs (:segs vr)
           h (- (:y lr) (:y ul))               
           ppx (/ h (- (:max vr) (:min vr)))]
-        (assoc vr 
-            :ppx ppx
-            :x0 (:x ul)
-            :x1 (:x lr)
-            :y0 (:y ul)
-            :y1 (:y lr)
-            :y (vruler-y-coords ul lr segs))))
+    (VRuler. (:y ul) (:max vr) ppx {} (assoc vr
+                                        :ppx ppx
+                                        :x0 (:x ul)
+                                        :x1 (:x lr)
+                                        :y0 (:y ul)
+                                        :y1 (:y lr)
+                                        :y (vruler-y-coords ul lr segs)))))
 
 ;(defmacro pix-y [& args]
 ;  (let [[ruler value f] args
