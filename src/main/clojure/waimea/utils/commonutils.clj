@@ -107,6 +107,6 @@
   (let [helper (fn [v] (if (keyword? v) (v m) v))]
     (map helper args)))
 
-(defn defl-map-args [m & args]
+(defn defl-map-kw [m & args]
   (let [kw (filter keyword? args)]
     (deflate-map kw m)))
