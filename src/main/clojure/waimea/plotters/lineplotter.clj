@@ -2,8 +2,9 @@
   (:require
     [waimea.common :as COMM]
     [waimea.protocols.chart :as CHART]
-    [waimea.rulers.vruler :as VR]
-    [waimea.rulers.dateruler :as HR])
+    (waimea.rulers
+      [vruler :as VR]
+      [dateruler :as HR]))
   (:import
     [javafx.scene.canvas GraphicsContext]
     [javafx.scene.paint Color]))
@@ -31,8 +32,8 @@
       (let [ cur-val (first v)
              cur-dx (second v)
              x (HR/pix-x hr cur-dx)
-             y0 (VR/pix-y vr 0.0)
-             y1 (VR/pix-y vr cur-val)]
+             y0 (CHART/calcPix vr 0.0)
+             y1 (CHART/calcPix vr cur-val)]
         (.strokeLine graphics x y0 x y1)))))
 
 (defn vruler-demo [vr]

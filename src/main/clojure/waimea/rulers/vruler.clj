@@ -65,22 +65,6 @@
 
     (VRuler. (:y ul) (:max vr) ppx {} dm)))
 
-
-(defn pix-y
-  ([ruler value]
-    (let [v-diff (- (:max ruler) value)]
-      (+ (:y0 ruler) (* (:ppx ruler) v-diff))))
-  ([ruler value f]
-    (f (pix-y ruler value))))
-
-
-(defn val-y [ruler px]
-  (let [pxv (/ 1.0 (:ppx ruler))
-    mx (:max ruler)
-    y0 (:y0 ruler)
-    v (* (- px y0) pxv)]
-    (- mx v)))
-
 (defn plot-vruler [ruler ^GraphicsContext g]
   (.setLineWidth g 0.25)
   (.setStroke g Color/DARKSLATEGRAY)
@@ -89,7 +73,7 @@
     (doseq [cur-y (:y ruler)]
       (let [t (.getLineWidth g)]
         (.setLineWidth g 1.0)
-        (.strokeText g (format "%.2f" (val-y ruler cur-y)) 5.5 (- cur-y 3.0))
+        (.strokeText g (format "%.2f" (CH/calcValue ruler cur-y)) 5.5 (- cur-y 3.0))
         (.setLineWidth g t))
       ;(Text 5 (- cur-y 3) (format "%.2f" (val-y ruler cur-y)))
       (.strokeLine g x0 cur-y x1 cur-y))))
@@ -103,7 +87,7 @@
       (doseq [cur-y (:y ruler)]
           ;(.setColor g Color/BLACK)
         (if (= (:legend ruler) true)
-          (.strokeText g (format "%.2f" (/ (val-y ruler cur-y) max-vol)) 5 (- cur-y 3)))
+          (.strokeText g (format "%.2f" (/ (CH/calcValue ruler cur-y) max-vol)) 5 (- cur-y 3)))
           ;(.setColor g (:color ruler))
           ;(.strokeLine g x0 cur-y x1 cur-y)
         (FX/drawLine  g x0 cur-y x1 cur-y))))
