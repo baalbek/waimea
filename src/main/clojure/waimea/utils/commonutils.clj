@@ -95,3 +95,18 @@
              ret))))))
 
 ;(def m (reduce (fn [m v] (assoc m v (* v v))) {} [1 2 3 4 5]))
+
+
+(defn deflate-map [kw m]
+  (loop [yx kw mx m]
+    (if-not (seq yx)
+      mx
+      (recur (rest yx) (dissoc mx (first yx))))))
+
+(defn fix-vals [m & args]
+  (let [helper (fn [v] (if (keyword? v) (v m) v))]
+    (map helper args)))
+
+(defn defl-map-args [m & args]
+  (let [kw (filter keyword? args)]
+    (deflate-map kw m)))

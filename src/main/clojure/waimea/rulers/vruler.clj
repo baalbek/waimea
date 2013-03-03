@@ -4,7 +4,9 @@
     [javafx.scene.text Text]
     [javafx.scene.paint Color])
   (:require
-    [waimea.utils.fxutils :as FX]
+    (waimea.utils
+      [fxutils :as FX]
+      [commonutils :as CUTIL])
     [waimea.protocols.chart :as CH]))
 
 
@@ -42,28 +44,27 @@
          ]
           (for [i (range (+ 1 increments))] (+ 0.5 (int (+ (* i gap) y0))))))
 
+
 (defn calibrate-vruler [q]                          
     (let [vr (:vruler q)       
           ul (:ul q)
           lr (:lr q)
           segs (:segs vr)
           h (- (:y lr) (:y ul))               
-          ppx (/ h (- (:max vr) (:min vr)))]
-    (VRuler. (:y ul) (:max vr) ppx {} (assoc vr
-                                        :ppx ppx
-                                        :x0 (:x ul)
-                                        :x1 (:x lr)
-                                        :y0 (:y ul)
-                                        :y1 (:y lr)
-                                        :y (vruler-y-coords ul lr segs)))))
+          ppx (/ h (- (:max vr) (:min vr)))
+          m  (assoc vr
+                  :ppx ppx
+                  :x0 (:x ul)
+                  :x1 (:x lr)
+                  :y0 (:y ul)
+                  :y1 (:y lr)
+                  :y (vruler-y-coords ul lr segs))
+          ;v (CUTIL/fix-vals m (:y ul) :max :ppx)
+          dm (CUTIL/defl-map-args m :max :ppx)]
+    ;(create-record-with-map 'VRuler m (:y ul) :max :ppx)))
 
-;(defmacro pix-y [& args]
-;  (let [[ruler value f] args
-;         base-form `(let [v-diff# (- (:max ~ruler) ~value)]
-;                  (+ (:y0 ~ruler) (* (:ppx ~ruler) v-diff#)))]
-;    (if (= f nil)
-;      base-form
-;      `(~f ~base-form))))
+    (VRuler. (:y ul) (:max vr) ppx {} dm)))
+
 
 (defn pix-y
   ([ruler value]
