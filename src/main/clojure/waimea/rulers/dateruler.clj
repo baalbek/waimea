@@ -19,8 +19,7 @@
         (+ (.x0 this)
           (* (.ppx this) h-diff))))
     ([this value f]
-      (f (CH/calcPix this value))))
-  (calcValue [this pix]))
+      (f (CH/calcPix this value)))))
 
 (defn calibrate-dateruler [q]                          
   (let [hr (:hruler q)
