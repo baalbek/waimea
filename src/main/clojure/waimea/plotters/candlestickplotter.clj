@@ -46,13 +46,13 @@
     (.setStroke graphics (Color/rgb 0 0 0))
     (let [jitter-fn #(+ 0.5 (int %))]
       (doseq [^StockBean p data]
-        (let [x (HR/pix-x hr (F/dx p) jitter-fn)
+        (let [x (CHART/calcPix hr (F/dx p) jitter-fn)
               opn-val (F/opn p)
               opn (CHART/calcPix vr opn-val jitter-fn)
               hi (CHART/calcPix vr (F/hi p) jitter-fn)
               lo (CHART/calcPix vr (F/lo p) jitter-fn)
               spot-val (F/spot p)
-              spot (CHART/calcPix vr spot-val jitter-fn)
+              spot (CHART/calcPix  vr spot-val jitter-fn)
               ]
           (if (> spot-val opn-val)
             (paint-candlestick graphics x hi spot opn lo :true)

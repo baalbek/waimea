@@ -59,10 +59,7 @@
                   :y0 (:y ul)
                   :y1 (:y lr)
                   :y (vruler-y-coords ul lr segs))
-          ;v (CUTIL/fix-vals m (:y ul) :max :ppx)
           dm (CUTIL/defl-map-kw m :max :ppx)]
-    ;(create-record-with-map 'VRuler m (:y ul) :max :ppx)))
-
     (VRuler. (:y ul) (:max vr) ppx {} dm)))
 
 (defn plot-vruler [ruler ^GraphicsContext g]
