@@ -2,7 +2,8 @@
   (:import
     [javafx.scene.canvas GraphicsContext]
     [javafx.scene.text Text]
-    [javafx.scene.paint Color])
+    [javafx.scene.paint Color]
+    [oahu.views.chart IRuler])
   (:require
     (waimea.utils
       [fxutils :as FX]
@@ -12,25 +13,14 @@
 
 (defrecord VRuler [y0 max ppx])
 
-
-(comment
-(extend-protocol CH/IRuler
-  VRuler
-  (calcPix
-    ([this value] 3)
-    ([this value f]
-      (f (CH/calcPix this value))))
-  (calcValue [this pix]))
-)
-
-(extend-protocol CH/IRuler
+(extend-protocol IRuler
   VRuler
   (calcPix
     ([this value]
       (let [v-diff (- (.max this) value)]
         (+ (.y0 this) (* (.ppx this) v-diff))))
     ([this value f]
-      (f (CH/calcPix this value))))
+      (f (.calcPix this value))))
   (calcValue [this pix]
     (let [pxv (/ 1.0 (.ppx this))
           v (* (- pix (.y0 this)) pxv)]
@@ -70,7 +60,7 @@
     (doseq [cur-y (:y ruler)]
       (let [t (.getLineWidth g)]
         (.setLineWidth g 1.0)
-        (.strokeText g (format "%.2f" (CH/calcValue ruler cur-y)) 5.5 (- cur-y 3.0))
+        (.strokeText g (format "%.2f" (.calcValue ruler cur-y)) 5.5 (- cur-y 3.0))
         (.setLineWidth g t))
       ;(Text 5 (- cur-y 3) (format "%.2f" (val-y ruler cur-y)))
       (.strokeLine g x0 cur-y x1 cur-y))))
@@ -84,7 +74,7 @@
       (doseq [cur-y (:y ruler)]
           ;(.setColor g Color/BLACK)
         (if (= (:legend ruler) true)
-          (.strokeText g (format "%.2f" (/ (CH/calcValue ruler cur-y) max-vol)) 5 (- cur-y 3)))
+          (.strokeText g (format "%.2f" (/ (.calcValue ruler cur-y) max-vol)) 5 (- cur-y 3)))
           ;(.setColor g (:color ruler))
           ;(.strokeLine g x0 cur-y x1 cur-y)
         (FX/drawLine  g x0 cur-y x1 cur-y))))
