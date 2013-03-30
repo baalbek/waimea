@@ -1,5 +1,6 @@
 package waimea.views.chart;
 
+import oahu.exceptions.NotImplementedException;
 import oahu.views.chart.IRuler;
 
 /**
@@ -9,13 +10,15 @@ import oahu.views.chart.IRuler;
  * Time: 6:31 PM
  */
 public class DefaultDateRuler implements IRuler {
+
     @Override
     public double calcPix(Object value) {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+        throw new NotImplementedException();
     }
 
     @Override
-    public double calcPix(Object value, Object func) {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+    public Object calcValue(double pix) {
+        throw new NotImplementedException();
     }
+
 }

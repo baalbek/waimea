@@ -2,9 +2,7 @@
   (:import
     [javafx.scene.canvas GraphicsContext]
     [javafx.scene.text Text]
-    [javafx.scene.paint Color]
-    ;s[oahu.views.chart IRuler]
-    [waimea.views.chart DefaultVRuler])
+    [javafx.scene.paint Color])
   (:require
     (waimea.utils
       [fxutils :as FX]
@@ -63,9 +61,7 @@
         (.setLineWidth g 1.0)
         (.strokeText g (format "%.2f" (CH/calcValue ruler cur-y)) 5.5 (- cur-y 3.0))
         (.setLineWidth g t))
-      ;(Text 5 (- cur-y 3) (format "%.2f" (val-y ruler cur-y)))
       (.strokeLine g x0 cur-y x1 cur-y))))
-    ;(FX/drawLine g x0 cur-y x1 cur-y))))
 
 (defn plot-vol-ruler [ruler ^GraphicsContext g]
   (.setStroke g Color/DARKSLATEGRAY)

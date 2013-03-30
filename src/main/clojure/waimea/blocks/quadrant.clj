@@ -3,8 +3,10 @@
         [waimea.rulers.vruler :as VR]
         [waimea.rulers.dateruler :as DR])
     (:import
+      [javafx.geometry Point2D]
       [javafx.scene.canvas Canvas GraphicsContext]
-      [javafx.scene.paint Color]))
+      [javafx.scene.paint Color]
+      [waimea.views.chart DefaultDateRuler DefaultVRuler]))
 
 (defn do-plotter [plt hr vr g]
     (let [data (:data plt)
@@ -14,12 +16,17 @@
 
 (defn plot-quadrant [^GraphicsContext g q]
   (let [vr (VR/calibrate-vruler q)
-        hr (DR/calibrate-dateruler q)]
+        hr (DR/calibrate-dateruler q)
+        ul (:ul q)
+        lr (:lr q)]
           ((:plot-fn vr) vr g)
           (DR/plot-dateruler hr g)
           (doseq [p (:plotters q)] 
             (p hr vr g))
-          [hr vr]))
+          [hr (DefaultVRuler.
+                (Point2D. (:x ul) (:y ul))
+                (Point2D. (:x lr) (:y lr))
+                (:ppx vr))]))
 
 (defn quadrant-height [quadrant margin ^Canvas c]
   (- (* (:pct quadrant) (.getHeight c)) margin))
