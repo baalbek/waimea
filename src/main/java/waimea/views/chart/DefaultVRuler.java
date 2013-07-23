@@ -2,7 +2,7 @@ package waimea.views.chart;
 
 import javafx.geometry.Point2D;
 import oahu.exceptions.NotImplementedException;
-import oahu.views.chart.IBoundaryRuler;
+import oahux.chart.IBoundaryRuler;
 
 
 /**

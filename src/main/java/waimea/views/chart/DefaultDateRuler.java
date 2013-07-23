@@ -1,7 +1,7 @@
 package waimea.views.chart;
 
 import oahu.exceptions.NotImplementedException;
-import oahu.views.chart.IRuler;
+import oahux.chart.IRuler;
 
 /**
  * Created with IntelliJ IDEA.
