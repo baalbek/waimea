@@ -7,7 +7,7 @@
     (:import
       [javafx.scene.canvas GraphicsContext]
       [javafx.scene.paint Color]
-      [oahu.financial.beans StockBean]))
+      [oahu.financial StockPrice]))
 
 (defn paint-candlestick [^GraphicsContext graphics
                          x
@@ -45,7 +45,7 @@
     (.setLineWidth graphics 0.5)
     (.setStroke graphics (Color/rgb 0 0 0))
     (let [jitter-fn #(+ 0.5 (int %))]
-      (doseq [^StockBean p data]
+      (doseq [^StockPrice p data]
         (let [x (CHART/calcPix hr (F/dx p) jitter-fn)
               opn-val (F/opn p)
               opn (CHART/calcPix vr opn-val jitter-fn)
