@@ -19,7 +19,8 @@
         (+ (.x0 this)
           (* (.ppx this) h-diff))))
     ([this value f]
-      (f (CH/calcPix this value)))))
+      (f (CH/calcPix this value))))
+  (calcValue [this pix]))
 
 (defn calibrate-dateruler [q]                          
   (let [hr (:hruler q)
@@ -34,7 +35,7 @@
             :y1 (:y lr)
             :ppx ppx)
         dm (CUTIL/defl-map-kw m :x0 :start :ppx)]
-  (DateRuler. (:x0 m) (:start m) ppx {} dm)))
+    (DateRuler. (:x0 m) (:start m) ppx {} dm)))
 
 (defn plot-date [^Date d ruler ^GraphicsContext g]
   (let [px (CH/calcPix ruler d)

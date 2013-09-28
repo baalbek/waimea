@@ -49,7 +49,7 @@
                   :y1 (:y lr)
                   :y (vruler-y-coords ul lr segs))
           dm (CUTIL/defl-map-kw m :max :ppx)]
-    (VRuler. (:y ul) (:max vr) ppx {} dm)))
+      (VRuler. (:y ul) (:max vr) ppx {} dm)))
 
 (defn plot-vruler [ruler ^GraphicsContext g]
   (.setLineWidth g 0.25)

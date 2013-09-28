@@ -21,12 +21,16 @@
         lr (:lr q)]
           ((:plot-fn vr) vr g)
           (DR/plot-dateruler hr g)
-          (doseq [p (:plotters q)] 
+          (doseq [p (:plotters q)]
             (p hr vr g))
-          [hr (DefaultVRuler.
-                (Point2D. (:x ul) (:y ul))
-                (Point2D. (:x lr) (:y lr))
-                (:ppx vr))]))
+    (if-let [snapu (:snap-unit q)]
+      [(DefaultDateRuler. (:x0 hr) (:start hr) (:ppx hr) snapu)
+       (DefaultVRuler.
+            (Point2D. (:x ul) (:y ul))
+            (Point2D. (:x lr) (:y lr))
+            (:ppx vr)
+            (:max vr))]
+      [nil nil])))
 
 (defn quadrant-height [quadrant margin ^Canvas c]
   (- (* (:pct quadrant) (.getHeight c)) margin))

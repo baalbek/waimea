@@ -14,13 +14,15 @@
                             legend
                             vr-plot-fn
                             vr-segs
-                            plotters]
+                            plotters
+                            snap-unit]
                   :or {     pct 0.25
                             gap 20
                             legend false
                             vr-plot-fn VR/plot-vruler
                             vr-segs 10
-                            plotters nil}}]
+                            plotters nil
+                            snap-unit nil}}]
   {:vruler
     {:min data-min
     :max data-max
@@ -34,7 +36,8 @@
     :legend legend}
   :pct pct
   :gap gap
-  :plotters plotters})
+  :plotters plotters
+  :snap-unit snap-unit})
 
 
 (defn block-chain [& {:keys [qs h x0 x1 y0]
