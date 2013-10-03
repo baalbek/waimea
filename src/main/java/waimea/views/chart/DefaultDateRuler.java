@@ -1,6 +1,5 @@
 package waimea.views.chart;
 
-import oahu.exceptions.NotImplementedException;
 import oahux.chart.IRuler;
 import org.apache.log4j.Logger;
 import org.joda.time.DateMidnight;

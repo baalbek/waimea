@@ -44,7 +44,10 @@ public class DefaultVRuler implements IBoundaryRuler {
 
     @Override
     public Object calcValue(double pix) {
-        throw new NotImplementedException();
+        double pxv = 1.0 / ppx;
+        double v = pxv * (pix - ul.getY());
+
+        return new Double(maxValue - v);
     }
 
     @Override
