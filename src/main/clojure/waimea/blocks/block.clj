@@ -1,5 +1,6 @@
 (ns waimea.blocks.block
-    (:require 
+    (:require
+        [waimea.utils.logservice :as LOG]
         [waimea.rulers.vruler :as VR]
         [waimea.utils.commonutils :as U]
         [waimea.common :as C]))

@@ -1,5 +1,6 @@
 (ns waimea.blocks.quadrant
     (:require 
+        [waimea.utils.logservice :as LOG]
         [waimea.rulers.vruler :as VR]
         [waimea.rulers.dateruler :as DR])
     (:import
@@ -30,7 +31,9 @@
             (Point2D. (:x lr) (:y lr))
             (:ppx vr)
             (:max vr))]
-      [nil nil])))
+      (do
+        (LOG/debug (str "Start date: " (:start hr) ", end date: " (:end hr)))
+        [nil nil]))))
 
 (defn quadrant-height [quadrant margin ^Canvas c]
   (- (* (:pct quadrant) (.getHeight c)) margin))
