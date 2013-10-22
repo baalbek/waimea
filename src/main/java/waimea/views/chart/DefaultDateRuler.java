@@ -1,5 +1,6 @@
 package waimea.views.chart;
 
+import oahux.chart.IDateBoundaryRuler;
 import oahux.chart.IRuler;
 import org.apache.log4j.Logger;
 import org.joda.time.DateMidnight;
@@ -14,7 +15,7 @@ import java.util.Date;
  * Date: 3/29/13
  * Time: 6:31 PM
  */
-public class DefaultDateRuler implements IRuler {
+public class DefaultDateRuler implements IDateBoundaryRuler {
     private Logger log = Logger.getLogger(getClass().getPackage().getName());
 
     private final double x0;
@@ -118,6 +119,16 @@ public class DefaultDateRuler implements IRuler {
                     result));
         }
         return result;
+    }
+
+    @Override
+    public Date getStartDate() {
+        return start.toDate();
+    }
+
+    @Override
+    public Date getEndDate() {
+        return end.toDate();
     }
     //endregion Private methods
 
