@@ -24,7 +24,7 @@
           (doseq [p (:plotters q)]
             (p hr vr g))
     (if-let [snapu (:snap-unit q)]
-      [(DefaultDateRuler. (:x0 hr) (:start hr) (:ppx hr) snapu)
+      [(DefaultDateRuler. (:x0 hr) (:start hr) (:end hr) (:ppx hr) snapu)
        (DefaultVRuler.
             (Point2D. (:x ul) (:y ul))
             (Point2D. (:x lr) (:y lr))

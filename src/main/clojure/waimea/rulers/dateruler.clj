@@ -9,7 +9,7 @@
 
 (def date-format (SimpleDateFormat. "MM/yy"))
 
-(defrecord DateRuler [x0 start ppx])
+(defrecord DateRuler [x0 start end ppx])
 
 (extend-protocol CH/IRuler
   DateRuler
@@ -34,8 +34,8 @@
             :y0 (:y ul)
             :y1 (:y lr)
             :ppx ppx)
-        dm (CUTIL/defl-map-kw m :x0 :start :ppx)]
-    (DateRuler. (:x0 m) (:start m) ppx {} dm)))
+        dm (CUTIL/defl-map-kw m :x0 :start :end :ppx)]
+    (DateRuler. (:x0 m) (:start m) (:end m) ppx {} dm)))
 
 (defn plot-date [^Date d ruler ^GraphicsContext g]
   (let [px (CH/calcPix ruler d)

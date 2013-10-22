@@ -20,12 +20,14 @@ public class DefaultDateRuler implements IRuler {
     private final double x0;
     private final double ppx;
     private final DateMidnight start;
+    private final DateMidnight end;
     private final int snapUnit;
 
-    public DefaultDateRuler(double x0, Date start, double ppx, int snapUnit) {
+    public DefaultDateRuler(double x0, Date start, Date end, double ppx, int snapUnit) {
         this.x0 = x0;
         this.ppx = ppx;
         this.start = new DateMidnight(start);
+        this.end = new DateMidnight(end);
         this.snapUnit = snapUnit;
     }
 
