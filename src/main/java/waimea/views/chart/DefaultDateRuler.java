@@ -35,7 +35,14 @@ public class DefaultDateRuler implements IDateBoundaryRuler {
     //region Interface Methods
     @Override
     public double calcPix(Object value) {
-        int daysElapsed =  Days.daysBetween(start,(DateMidnight)value).getDays();
+        DateMidnight valuex = null;
+        if (value instanceof Date) {
+            valuex = new DateMidnight(value);
+        }
+        else {
+            valuex = (DateMidnight)value;
+        }
+        int daysElapsed =  Days.daysBetween(start,valuex).getDays();
 
         double result = x0 + (ppx * daysElapsed);
 

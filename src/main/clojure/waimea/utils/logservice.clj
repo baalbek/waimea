@@ -2,20 +2,20 @@
   (:import
     [org.apache.log4j Logger]))
 
-(def logger (Logger/getLogger "waimea.utils"))
+(def logger ^Logger (Logger/getLogger "waimea.utils"))
 
 (defn fatal [msg]
-  (.fatal logger msg))
+  (.fatal ^Logger logger msg))
 
 (defn error [msg]
-  (.error logger msg))
+  (.error ^Logger logger msg))
 
 (defn warn [msg]
-  (.warn logger msg))
+  (.warn ^Logger logger msg))
 
 (defn info [msg]
-  (.info logger msg))
+  (.info ^Logger logger msg))
 
 (defn debug [msg]
-  (if (.isDebugEnabled logger)
-    (.debug logger msg)))
+  (if (.isDebugEnabled ^Logger logger)
+    (.debug ^Logger logger msg)))
