@@ -1,0 +1,38 @@
+apply plugin: 'clojure'
+group = 'rcstadheim'
+archivesBaseName = 'waimea'
+version = '2.0'
+
+aotCompile = true
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'http://clojars.org/repo'
+    }
+}
+          
+
+dependencies {
+    compile project(':oahu')
+    compile project(':oahux')
+    compile project(':maunaloax')
+    compile 'org.clojure:clojure:1.5.1'
+    compile 'org.clojure:clojure-contrib:1.2.0'
+    compile 'org.clojure:math.numeric-tower:0.0.2'
+    compile 'joda-time:joda-time:2.3'
+    compile 'log4j:log4j:1.2.17'
+}
+
+buildscript {
+    repositories {
+        maven {
+            url 'http://clojars.org/repo'
+        }
+    }
+
+    dependencies {
+        classpath 'clojuresque:clojuresque:1.5.8'
+    }
+}
+
