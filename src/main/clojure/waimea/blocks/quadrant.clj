@@ -7,7 +7,7 @@
       [javafx.geometry Point2D]
       [javafx.scene.canvas Canvas GraphicsContext]
       [javafx.scene.paint Color]
-      [waimea.views.chart DefaultDateRuler DefaultVRuler]))
+      [maunaloax.views.chart DefaultDateRuler DefaultVRuler]))
 
 (defn do-plotter [plt hr vr g]
     (let [data (:data plt)
