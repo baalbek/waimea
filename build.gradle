@@ -17,7 +17,7 @@ dependencies {
     compile project(':oahu')
     compile project(':oahux')
     compile project(':maunaloax')
-    compile 'org.clojure:clojure:1.5.1'
+    compile 'org.clojure:clojure:1.6.0'
     compile 'org.clojure:clojure-contrib:1.2.0'
     compile 'org.clojure:math.numeric-tower:0.0.2'
     //compile 'joda-time:joda-time:2.3'
