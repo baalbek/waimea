@@ -2,7 +2,7 @@ apply plugin: 'clojure'
 group = 'rcstadheim'
 archivesBaseName = 'waimea'
 
-version = "$major.$minor.1"
+version = "$major.$minor.0"
 
 aotCompile = true
 
