@@ -2,7 +2,7 @@ apply plugin: 'clojure'
 group = 'rcstadheim'
 archivesBaseName = 'waimea'
 
-version = "$major.$minor.0"
+version = "${major}.${minor}.SNAPSHOT"
 
 aotCompile = true
 
@@ -36,3 +36,6 @@ buildscript {
     }
 }
 
+task cj(type: Copy, dependsOn: [build]) {
+    into '../maunaloa/dist' from new File("$libsDir/waimea-${version}.jar")
+}
