@@ -6,8 +6,7 @@
       [vruler :as VR]
       [dateruler :as HR]))
   (:import
-    [javafx.scene.canvas GraphicsContext]
-    [javafx.scene.paint Color]))
+    [javafx.scene.canvas GraphicsContext]))
 
 ;(defn single-line-plotter [values dx stroke line-width]
 (defn single-line-plotter [{:keys [values
@@ -40,5 +39,5 @@
              y1 (CHART/calcPix vr cur-val)]
         (.strokeLine graphics x y0 x y1)))))
 
-(defn vruler-demo [vr]
-  (CHART/calcPix vr 93.0))
+;(defn vruler-demo [vr]
+;  (CHART/calcPix vr 93.0))

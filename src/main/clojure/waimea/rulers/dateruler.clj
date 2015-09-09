@@ -3,7 +3,6 @@
             [waimea.protocols.chart :as CH])
   (:import
     [javafx.scene.canvas GraphicsContext]
-    [javafx.scene.paint Color]
     [java.util Date]
     [java.text SimpleDateFormat]))
 

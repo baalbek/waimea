@@ -6,7 +6,6 @@
     (:import
       [javafx.geometry Point2D]
       [javafx.scene.canvas Canvas GraphicsContext]
-      [javafx.scene.paint Color]
       [maunaloax.views.chart DefaultDateRuler DefaultVRuler]))
 
 (defn do-plotter [plt hr vr g]

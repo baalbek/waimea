@@ -15,10 +15,10 @@
                          y1
                          y2
                          y-btm
-                         is-bull]
+                         is-bull
+                         bear-color]
   (let [x1 (- x 3)
         x2 (+ x 3)]
-
     (doto graphics
       ;; the wicks
       (.beginPath)
@@ -34,16 +34,18 @@
       (.lineTo x1 y1))
     (if (= is-bull :false)
       (doto graphics
-        (.setFill (Color/rgb 255 0 0))
+        ;(.setFill (Color/rgb 255 0 0))
+        (.setFill bear-color)
         (.fillRect x1 y1 (- x2 x1) (- y2 y1))))
     (doto graphics
       (.closePath)
       (.stroke))))
 
-(defn candlestick-plotter [data]
+(defn candlestick-plotter [data fg-color bear-color]
   (fn [hr vr ^GraphicsContext graphics]
     (.setLineWidth graphics 0.5)
-    (.setStroke graphics (Color/rgb 0 0 0))
+    ;(.setStroke graphics (Color/rgb 0 0 0))
+    (.setStroke graphics fg-color)
     (let [jitter-fn #(+ 0.5 (int %))]
       (doseq [^StockPrice p data]
         (let [x (CHART/calcPix hr (F/dx p) jitter-fn)
@@ -55,8 +57,9 @@
               spot (CHART/calcPix  vr spot-val jitter-fn)
               ]
           (if (> spot-val opn-val)
-            (paint-candlestick graphics x hi spot opn lo :true)
-            (paint-candlestick graphics x hi opn spot lo :false)))))))
+
+            (paint-candlestick graphics x hi spot opn lo :true bear-color)
+            (paint-candlestick graphics x hi opn spot lo :false bear-color)))))))
 
 
 
