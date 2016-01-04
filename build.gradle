@@ -1,10 +1,9 @@
-apply plugin: 'clojure'
+apply plugin: 'java'
+
 group = 'rcstadheim'
 archivesBaseName = 'waimea'
 
 version = "${major}.${minor}.SNAPSHOT"
-
-aotCompile = true
 
 repositories {
     mavenCentral()
@@ -19,23 +18,28 @@ dependencies {
     compile project(':oahux')
     compile project(':maunaloax')
     compile "org.clojure:clojure:$clojureVersion"
-    compile "org.clojure:clojure-contrib:$clojureContribVersion"
+    //compile "org.clojure:clojure-contrib:$clojureContribVersion"
     compile "org.clojure:math.numeric-tower:$numericTowerVersion"
     compile "log4j:log4j:$log4jVersion"
 }
 
 buildscript {
     repositories {
-        maven {
-            url 'http://clojars.org/repo'
-        }
+        mavenLocal()
     }
-
     dependencies {
-        classpath "clojuresque:clojuresque:$clojuresqueVersion"
+        classpath group: 'rcstadheim', name: 'palenque',
+                version: '1.0'
     }
 }
 
+apply plugin: 'rcstadheim.palenque'
+
+
 task cj(type: Copy, dependsOn: [build]) {
     into '../maunaloa/dist' from new File("$libsDir/waimea-${version}.jar")
+}
+
+jar {
+    from ("target/classes") include "**/*.class"
 }
