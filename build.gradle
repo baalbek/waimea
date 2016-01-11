@@ -22,6 +22,7 @@ dependencies {
     compile "log4j:log4j:$log4jVersion"
 }
 
+/*
 buildscript {
     repositories {
         mavenLocal()
@@ -38,6 +39,7 @@ apply plugin: 'rcstadheim.palenque'
 task cj(type: Copy, dependsOn: [build]) {
     into '../maunaloa/dist' from new File("$libsDir/waimea-${version}.jar")
 }
+*/
 
 jar {
     from ("target/classes") include "**/*.class"
