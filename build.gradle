@@ -22,6 +22,7 @@ dependencies {
     compile "log4j:log4j:$log4jVersion"
 }
 
+/*
 buildscript {
     repositories {
         mavenLocal()
@@ -37,11 +38,14 @@ apply plugin: 'rcstadheim.palenque'
 task winLeinDeps(type: rcstadheim.palenque.LeinDepsTask) {
     useLibsSymlink = false
 }
-
-task cj(type: Copy, dependsOn: [build]) {
-    into '../maunaloa/dist' from new File("$libsDir/waimea-${version}.jar")
-}
+//*/
 
 jar {
     from ("target/classes") include "**/*.class"
+}
+
+def jarFile = new File("$libsDir/waimea-${version}.jar")
+
+task copyToParentProject(type: Copy, dependsOn: jar) {
+    into parentDist from jarFile
 }
