@@ -22,24 +22,6 @@ dependencies {
     compile "log4j:log4j:$log4jVersion"
 }
 
-/*
-buildscript {
-    repositories {
-        mavenLocal()
-    }
-    dependencies {
-        classpath group: 'rcstadheim', name: 'palenque',
-                version: '1.0'
-    }
-}
-
-apply plugin: 'rcstadheim.palenque'
-
-task winLeinDeps(type: rcstadheim.palenque.LeinDepsTask) {
-    useLibsSymlink = false
-}
-//*/
-
 jar {
     from ("target/classes") include "**/*.class"
 }
