@@ -23,7 +23,8 @@ dependencies {
 }
 
 jar {
-    from ("target/classes") include "**/*.class"
+    // from ("target/classes") include "**/*.class"
+    from ("target/classes") include "vega/**/*.class"
 }
 
 def jarFile = new File("$libsDir/waimea-${version}.jar")
