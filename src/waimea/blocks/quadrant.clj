@@ -1,5 +1,5 @@
 (ns waimea.blocks.quadrant
-    (:require 
+    (:require
         [waimea.utils.logservice :as LOG]
         [waimea.rulers.vruler :as VR]
         [waimea.rulers.dateruler :as DR])
@@ -19,10 +19,10 @@
         hr (DR/calibrate-dateruler q)
         ul (:ul q)
         lr (:lr q)]
-          ((:plot-fn vr) vr g)
-          (DR/plot-dateruler hr g)
-          (doseq [p (:plotters q)]
-            (p hr vr g))
+       ((:plot-fn vr) vr g)
+       (DR/plot-dateruler hr g)
+       (doseq [p (:plotters q)]
+         (p hr vr g))
     (if-let [snapu (:snap-unit q)]
       [(DefaultDateRuler. (:x0 hr) (:start hr) (:end hr) (:ppx hr) snapu)
        (DefaultVRuler.
@@ -36,4 +36,3 @@
 
 (defn quadrant-height [quadrant margin ^Canvas c]
   (- (* (:pct quadrant) (.getHeight c)) margin))
-
